@@ -131,12 +131,8 @@
     }
     
     NSInteger gridHeight;
-    if (self.showGridArray.count % 3 == 0) {
-        gridHeight = 123 * self.showGridArray.count/3;
-    }
-    else{
-        gridHeight = 123 * (self.showGridArray.count/3+1);
-    }
+    gridHeight = 123 * self.showGridArray.count/3;
+    
     myScrollView.contentInset = UIEdgeInsetsMake(0, 0, gridHeight, 0);
 }
 
