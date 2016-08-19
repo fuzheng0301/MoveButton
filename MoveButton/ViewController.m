@@ -2,7 +2,7 @@
 //  ViewController.m
 //  MoveButton
 //
-//  Created by fuzheng on 16-5-26.
+//  Created by 聚财通 on 16/5/26.
 //  Copyright © 2016年 付正. All rights reserved.
 //
 
@@ -66,6 +66,7 @@
     self.moreGridIdArray = [[NSMutableArray alloc] initWithCapacity:12];
     self.moreGridTitleArray = [[NSMutableArray alloc]initWithCapacity:12];
     self.moreGridImageArray = [[NSMutableArray alloc]initWithCapacity:12];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -81,7 +82,6 @@
     
     [myScrollView removeFromSuperview];
     [self creatMyScrollView];
-    
 }
 
 - (void)creatMyScrollView
@@ -130,9 +130,20 @@
         gridItem.gridCenterPoint = gridItem.center;
     }
     
+    //更新页面
+    [self getNewData];
+}
+
+#pragma mark --- 更新页面
+-(void)getNewData
+{
     NSInteger gridHeight;
-    gridHeight = 123 * self.showGridArray.count/3;
-    
+    if (self.showGridArray.count % 3 == 0) {
+        gridHeight = 123 * self.showGridArray.count/3;
+    }
+    else{
+        gridHeight = 123 * (self.showGridArray.count/3+1);
+    }
     myScrollView.contentInset = UIEdgeInsetsMake(0, 0, gridHeight, 0);
 }
 
@@ -146,7 +157,7 @@
     //查看是否有选中的格子，并且比较点击的格子是否就是选中的格子
     for (NSInteger i = 0; i < [_gridListArray count]; i++) {
         CustomGrid *item = _gridListArray[i];
-        if (item.isChecked && item.gridId != gridItem.gridId) {
+        if (item.isChecked) {
             item.isChecked = NO;
             item.isMove = NO;
             isSelected = NO;
@@ -160,12 +171,26 @@
             if (gridItem.gridId == 0) {
                 isSkip = YES;
             }
-            break;
+            //            break;
         }
+        //        else if (item.isChecked && item.gridId == gridItem.gridId) {
+        //            item.isChecked = NO;
+        //            item.isMove = NO;
+        //            isSelected = NO;
+        //            isSkip = NO;
+        //
+        //            //隐藏删除图标
+        //            UIButton *removeBtn = (UIButton *)[self.gridListView viewWithTag:gridItem.gridId];
+        //            removeBtn.hidden = YES;
+        //            [item setBackgroundImage:normalImage forState:UIControlStateNormal];
+        //
+        //            if (gridItem.gridId == 0) {
+        //                isSkip = YES;
+        //            }
+        //        }
     }
     
     if (isSkip) {
-        
         [self itemAction:gridItem.gridTitle];
     }
 }
@@ -208,6 +233,9 @@
     }
     // 保存更新后数组
     [self saveArray];
+    
+    //更新页面
+    [self getNewData];
 }
 
 #pragma mark - 长按格子
@@ -419,12 +447,8 @@
     NSLog(@"更新后imageArray = %@",imageArray);
     
     NSInteger gridHeight;
-    if (self.showGridArray.count % 3 == 0) {
-        gridHeight = 123 * self.showGridArray.count/3;
-    }
-    else{
-        gridHeight = 123 * (self.showGridArray.count/3+1);
-    }
+    gridHeight = 123 * (self.showGridArray.count/3);
+    
     myScrollView.contentInset = UIEdgeInsetsMake(0, 0, gridHeight + 150, 0);
 }
 

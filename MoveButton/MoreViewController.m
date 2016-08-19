@@ -2,8 +2,8 @@
 //  MoreViewController.m
 //  MoveGrid
 //
-//  Created by fuzheng on 16-5-26.
-//  Copyright © 2016年 付正. All rights reserved.
+//  Created by Jerry.li on 14-11-7.
+//  Copyright (c) 2014年 51app. All rights reserved.
 //
 
 #import "MoreViewController.h"
@@ -123,7 +123,7 @@
     for (NSInteger index = 0; index < self.gridItemArray.count; index++)
     {
         CustomGrid *gridItem = self.gridItemArray[index];
-        if (gridItem.isChecked && gridItem.gridId != clickItem.gridId)
+        if (gridItem.isChecked)
         {
             //隐藏删图标
             UIButton *deleteButton = (UIButton *)[self.showMoreGridView viewWithTag:gridItem.gridId];
