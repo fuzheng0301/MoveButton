@@ -449,7 +449,7 @@
     NSInteger gridHeight;
     gridHeight = 123 * (self.showGridArray.count/3);
     
-    myScrollView.contentInset = UIEdgeInsetsMake(0, 0, gridHeight + 150, 0);
+    myScrollView.contentInset = UIEdgeInsetsMake(0, 0, gridHeight + 123, 0);
 }
 
 #pragma mark 点击 按钮
